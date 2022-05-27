@@ -26,9 +26,10 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: "none",
   padding: grid * 2,
   margin: `0 0 ${grid}px 0`,
-
+   display : 'flex',
+  justifyContent: 'space-between',
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
+  background: isDragging ? "#40e0d0" : "#f0f2f5",
 
   // styles we need to Comply on draggables
   ...draggableStyle,
@@ -36,15 +37,28 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 
 const getButtonStyle = () => ({
   padding: "10px",
-  backgroundColor: "green",
+  backgroundColor: "#1890ff",
   color: "white",
+  border:0,
   cursor:"pointer"
+});
+const getSubmitButtonStyle = () => ({
+  padding: "10px",
+  backgroundColor: "#0abab5",
+  color: "white",
+  border:0,
+  cursor:"pointer",
+  float: 'right',
+  margin:'20px 40px 20px 20px',
 });
 
 const getListStyle = (isDraggingOver) => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
-  width: 250,
+  width: '80%',
+  margin:'auto'
+ // display : 'flex',
+  //justifyContent: 'space-between'
 });
 
 const Home = ({ data,setData }) => {
@@ -70,6 +84,7 @@ const Home = ({ data,setData }) => {
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   return (
+    <>
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
         {(provided, snapshot) => (
@@ -104,6 +119,9 @@ const Home = ({ data,setData }) => {
         )}
       </Droppable>
     </DragDropContext>
+    <button onClick={()=>{console.log("submit clicked");}} style={getSubmitButtonStyle()}>Submit</button>
+    </>
+
   );
 };
 

@@ -25,9 +25,10 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: "none",
   padding: grid * 2,
   margin: `0 0 ${grid}px 0`,
-
+  display : 'flex',
+  justifyContent: 'space-between',
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
+  background: isDragging ? "#40e0d0" : "#f0f2f5",
 
   // styles we need to Comply on draggables
   ...draggableStyle,
@@ -36,18 +37,29 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 const getListStyle = (isDraggingOver) => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
-  width: 200,
+  width: '80%',
+  margin:'auto'
   
 //   marginLeft:500,
+});
+
+const getBackButtonStyle = () => ({
+  padding: "10px",
+  backgroundColor: "#0abab5",
+  color: "white",
+  border:0,
+  cursor:"pointer",
+  //float: 'right',
+  margin:'20px 20px 20px 40px',
 });
 
 const Video = ({data,setData}) => {
     const location = useLocation();
     const {index} = location.state;
   
-    if(!index){
-        Navigate({to:"/"});
-    }
+    // if(!index){
+    //     Navigate({to:"/"});
+    // }
   const [items, setItems] = useState(data[index]?.videos);
 
   const onDragEnd = (result) => {
@@ -76,10 +88,11 @@ const Video = ({data,setData}) => {
   }, [data])
   
 
-
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   return (
+    <>
+    
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
         {(provided, snapshot) => (
@@ -112,6 +125,13 @@ const Video = ({data,setData}) => {
         )}
       </Droppable>
     </DragDropContext>
+    <button style={getBackButtonStyle()} onClick={()=>{
+      window.history.back();
+    }}>
+        Go Back
+    </button>
+    </>
+
   );
 };
 
