@@ -81,6 +81,19 @@ const Home = ({ data,setData }) => {
     setItems(data);
   }, [data]);
 
+  const handleSubmit = ()=>{
+    const d = data.map((d,i)=>({
+      ...d,
+      order:i+1,
+      videos:d.videos.map((v,i)=>({
+        ...v,order:i+1
+      }))
+    }))
+
+    console.log(d)
+
+  }
+
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   return (
@@ -119,7 +132,7 @@ const Home = ({ data,setData }) => {
         )}
       </Droppable>
     </DragDropContext>
-    <button onClick={()=>{console.log("submit clicked");}} style={getSubmitButtonStyle()}>Submit</button>
+    <button onClick={handleSubmit} style={getSubmitButtonStyle()}>Submit</button>
     </>
 
   );
